@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTC Team Hub — Season 2025</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent: #1D9E75;
+  --accent-light: #E1F5EE;
+  --accent-dark: #0F6E56;
+  --warn: #EF9F27;
+  --warn-light: #FAEEDA;
+  --danger: #E24B4A;
+  --danger-light: #FCEBEB;
+  --info: #378ADD;
+  --info-light: #E6F1FB;
+  --purple: #7F77DD;
+  --purple-light: #EEEDFE;
+  --bg: #f8f9fa;
+  --surface: #ffffff;
+  --surface2: #f1f3f5;
+  --border: rgba(0,0,0,0.1);
+  --border2: rgba(0,0,0,0.18);
+  --text: #1a1a1a;
+  --text2: #555;
+  --text3: #888;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --shadow: 0 1px 4px rgba(0,0,0,0.07), 0 2px 12px rgba(0,0,0,0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d23;
+    --surface2: #22262e;
+    --border: rgba(255,255,255,0.1);
+    --border2: rgba(255,255,255,0.18);
+    --text: #f0f0f0;
+    --text2: #aaa;
+    --text3: #666;
+    --shadow: 0 1px 4px rgba(0,0,0,0.4), 0 2px 12px rgba(0,0,0,0.3);
+    --accent-light: #0d3326;
+    --info-light: #0d1f35;
+    --warn-light: #2e1f05;
+    --danger-light: #2d0f0f;
+    --purple-light: #1a1840;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Layout ── */
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0.875rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-icon i { font-size: 22px; color: #fff; }
+.logo-text { font-size: 16px; font-weight: 600; color: var(--text); }
+.logo-sub { font-size: 11px; color: var(--text3); }
+
+.nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav-btn {
+  padding: 7px 13px; border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: transparent; cursor: pointer; font-size: 13px;
+  color: var(--text2); transition: all 0.15s;
+  display: flex; align-items: center; gap: 5px;
+  font-family: inherit;
+}
+.nav-btn:hover { background: var(--surface2); color: var(--text); }
+.nav-btn.active { background: var(--accent-light); color: var(--accent-dark); border-color: var(--accent); font-weight: 500; }
+
+.content { flex: 1; padding: 1.5rem; max-width: 900px; margin: 0 auto; width: 100%; }
+
+/* ── Stats ── */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; box-shadow: var(--shadow); }
+.stat-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-value { font-size: 24px; font-weight: 600; }
+.stat-value.green { color: var(--accent); }
+.stat-value.amber { color: var(--warn); }
+.stat-value.red { color: var(--danger); }
+.stat-value.blue { color: var(--info); }
+
+/* ── Cards ── */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; flex-wrap: wrap; gap: 8px;
+}
+.section-title { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.section-title i { font-size: 18px; color: var(--accent); }
+
+.card-list { display: flex; flex-direction: column; gap: 8px; }
+
+.item-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  display: flex; align-items: flex-start; gap: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-shadow: var(--shadow);
+}
+.item-card:hover { border-color: var(--border2); }
+
+.item-main { flex: 1; min-width: 0; }
+.item-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.item-meta { font-size: 12px; color: var(--text3); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.item-meta span { display: flex; align-items: center; gap: 3px; }
+.item-note { font-size: 12px; color: var(--text2); margin-top: 5px; line-height: 1.4; }
+
+.item-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.icon-btn {
+  width: 30px; height: 30px; border-radius: 7px;
+  border: 1px solid var(--border);
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text3); transition: all 0.15s; font-size: 15px;
+}
+.icon-btn:hover { background: var(--surface2); color: var(--text); }
+.icon-btn.danger:hover { background: var(--danger-light); color: var(--danger); border-color: var(--danger); }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 500;
+}
+.badge-todo { background: var(--surface2); color: var(--text2); }
+.badge-inprogress { background: var(--info-light); color: #185FA5; }
+.badge-done { background: var(--accent-light); color: var(--accent-dark); }
+.badge-blocked { background: var(--danger-light); color: #A32D2D; }
+.badge-ordered { background: var(--purple-light); color: #3C3489; }
+.badge-arrived { background: var(--accent-light); color: var(--accent-dark); }
+.badge-needed { background: var(--warn-light); color: #854F0B; }
+.badge-high { background: var(--danger-light); color: #A32D2D; }
+.badge-medium { background: var(--warn-light); color: #854F0B; }
+.badge-low { background: var(--surface2); color: var(--text2); }
+
+/* ── Check button ── */
+.check-btn {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  background: transparent; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; margin-top: 1px; font-size: 12px;
+}
+.check-btn.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+.check-btn:not(.done) { color: transparent; }
+
+/* ── Filter chips ── */
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.filter-chip {
+  padding: 5px 12px; border-radius: 20px; font-size: 12px;
+  cursor: pointer; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text2); transition: all 0.15s;
+  font-family: inherit;
+}
+.filter-chip:hover { border-color: var(--border2); }
+.filter-chip.active { background: var(--accent-light); color: var(--accent-dark); border-color: var(--accent); font-weight: 500; }
+
+/* ── Add button ── */
+.add-btn {
+  padding: 8px 16px; background: var(--accent); color: #fff;
+  border: none; border-radius: var(--radius-md);
+  font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: background 0.15s; font-family: inherit; font-weight: 500;
+}
+.add-btn:hover { background: var(--accent-dark); }
+.add-btn.secondary {
+  background: transparent; color: var(--accent); border: 1px solid var(--accent);
+}
+.add-btn.secondary:hover { background: var(--accent-light); }
+
+/* ── Progress ── */
+.progress-bar { height: 7px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.4s ease; }
+
+/* ── Next meeting banner ── */
+.next-meeting-banner {
+  background: var(--accent-light); border: 1px solid var(--accent);
+  border-radius: var(--radius-lg); padding: 14px 16px;
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 12px;
+}
+.next-meeting-banner i { font-size: 26px; color: var(--accent); flex-shrink: 0; }
+.nm-label { font-size: 11px; color: var(--accent-dark); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.nm-date { font-size: 15px; font-weight: 600; color: var(--accent-dark); margin-top: 1px; }
+
+/* ── Members ── */
+.member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.member-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px; text-align: center;
+  position: relative; box-shadow: var(--shadow);
+}
+.member-card .item-actions { position: absolute; top: 8px; right: 8px; }
+.member-big-avatar {
+  width: 54px; height: 54px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 600; margin: 0 auto 10px;
+}
+.member-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.member-role { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+.member-skills { font-size: 11px; color: var(--text3); margin-top: 4px; }
+.member-stats { font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+
+.member-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-weight: 600; flex-shrink: 0;
+}
+
+/* ── Meetings ── */
+.meeting-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+.meeting-date { font-size: 12px; color: var(--text3); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+.meeting-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.meeting-notes { font-size: 13px; color: var(--text2); line-height: 1.55; white-space: pre-wrap; }
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; padding: 1rem; backdrop-filter: blur(2px);
+}
+.modal {
+  background: var(--surface); border-radius: var(--radius-xl);
+  border: 1px solid var(--border); padding: 1.5rem;
+  width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.modal-title { font-size: 16px; font-weight: 600; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 8px; }
+.modal-title i { font-size: 20px; color: var(--accent); }
+
+.form-row { margin-bottom: 12px; }
+.form-label { font-size: 12px; color: var(--text2); margin-bottom: 4px; display: block; font-weight: 500; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 9px 11px;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text); font-size: 14px;
+  font-family: inherit; transition: border-color 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+}
+.form-textarea { min-height: 80px; resize: vertical; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.btn-cancel {
+  padding: 8px 16px; border: 1px solid var(--border2);
+  background: transparent; border-radius: var(--radius-md);
+  cursor: pointer; font-size: 13px; color: var(--text2); font-family: inherit;
+}
+.btn-cancel:hover { background: var(--surface2); }
+.btn-save { padding: 8px 18px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-md); cursor: pointer; font-size: 13px; font-weight: 500; font-family: inherit; }
+.btn-save:hover { background: var(--accent-dark); }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 11px 18px;
+  font-size: 13px; z-index: 999; display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); animation: slideUp 0.25s ease;
+}
+.toast i { color: var(--accent); font-size: 17px; }
+@keyframes slideUp { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* ── Cost banner ── */
+.cost-banner {
+  background: var(--warn-light); border: 1px solid var(--warn);
+  border-radius: var(--radius-md); padding: 10px 14px;
+  font-size: 13px; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 8px; color: #854F0B;
+}
+.cost-banner i { color: var(--warn); font-size: 17px; }
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center; padding: 3rem 1rem;
+  color: var(--text3); font-size: 14px;
+}
+.empty-state i { font-size: 40px; display: block; margin-bottom: 10px; opacity: 0.4; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .header { padding: 0.75rem 1rem; }
+  .content { padding: 1rem; }
+  .nav-btn span { display: none; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .member-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center; padding: 1.25rem; font-size: 12px;
+  color: var(--text3); border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon"><i class="ti ti-robot"></i></div>
+    <div>
+      <div class="logo-text">FTC Team Hub</div>
+      <div class="logo-sub">First Tech Challenge — Season 2025</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="navigate('dashboard')" id="nav-dashboard">
+      <i class="ti ti-dashboard"></i> <span>Dashboard</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('actions')" id="nav-actions">
+      <i class="ti ti-checkbox"></i> <span>Actions</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('parts')" id="nav-parts">
+      <i class="ti ti-tool"></i> <span>Parts</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('members')" id="nav-members">
+      <i class="ti ti-users"></i> <span>Team</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('meetings')" id="nav-meetings">
+      <i class="ti ti-calendar"></i> <span>Meetings</span>
+    </button>
+  </nav>
+</header>
+
+<main class="content" id="main-content"></main>
+
+<footer class="footer">
+  FTC Team Hub · Data saved in your browser · Built for First Tech Challenge 2025
+</footer>
+
+</div>
+
+<div id="modal-container"></div>
+<div id="toast-container"></div>
+
+<script>
+const STORAGE_KEY = 'ftc_hub_v1';
+
+let state = {
+  members: [],
+  actions: [],
+  parts: [],
+  meetings: [],
+  currentView: 'dashboard',
+  actionFilter: 'all',
+  partsFilter: 'all'
+};
+
+const COLORS = [
+  {bg:'#E1F5EE',text:'#085041'},
+  {bg:'#E6F1FB',text:'#0C447C'},
+  {bg:'#EEEDFE',text:'#3C3489'},
+  {bg:'#FAECE7',text:'#712B13'},
+  {bg:'#FBEAF0',text:'#72243E'},
+  {bg:'#FAEEDA',text:'#633806'},
+  {bg:'#EAF3DE',text:'#27500A'},
+  {bg:'#F1EFE8',text:'#2C2C2A'},
+];
+
+function getColor(name) {
+  if (!name) return COLORS[0];
+  let sum = 0; for (let c of name) sum += c.charCodeAt(0);
+  return COLORS[sum % COLORS.length];
+}
+
+function initials(name) {
+  if (!name) return '?';
+  return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+}
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      members: state.members,
+      actions: state.actions,
+      parts: state.parts,
+      meetings: state.meetings
+    }));
+  } catch(e) { console.error('Save failed', e); }
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      state.members = d.members || [];
+      state.actions = d.actions || [];
+      state.parts = d.parts || [];
+      state.meetings = d.meetings || [];
+    }
+  } catch(e) { console.error('Load failed', e); }
+}
+
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+function navigate(view) {
+  state.currentView = view;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('nav-' + view);
+  if (btn) btn.classList.add('active');
+  render();
+}
+
+function render() {
+  const el = document.getElementById('main-content');
+  switch (state.currentView) {
+    case 'dashboard': el.innerHTML = renderDashboard(); break;
+    case 'actions': el.innerHTML = renderActions(); break;
+    case 'parts': el.innerHTML = renderParts(); break;
+    case 'members': el.innerHTML = renderMembers(); break;
+    case 'meetings': el.innerHTML = renderMeetings(); break;
+  }
+}
+
+function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function formatDate(d) {
+  if (!d) return '';
+  const [y, m, day] = d.split('-').map(Number);
+  return new Date(y, m - 1, day).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function badgeHTML(val, type) {
+  const map = {
+    status: { todo: 'badge-todo', inprogress: 'badge-inprogress', done: 'badge-done', blocked: 'badge-blocked' },
+    priority: { high: 'badge-high', medium: 'badge-medium', low: 'badge-low' },
+    parts: { needed: 'badge-needed', ordered: 'badge-ordered', arrived: 'badge-arrived' }
+  };
+  const labels = { inprogress: 'In Progress' };
+  const cls = (map[type] || {})[val] || 'badge-todo';
+  const label = labels[val] || (val ? val.charAt(0).toUpperCase() + val.slice(1) : '');
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+function memberOptions(selected) {
+  return '<option value="">— Unassigned —</option>' +
+    state.members.map(m =>
+      `<option value="${m.id}" ${selected === m.id ? 'selected' : ''}>${esc(m.name)}</option>`
+    ).join('');
+}
+
+function avatarHTML(name, size = 22, fontSize = 10) {
+  const clr = getColor(name);
+  return `<div class="member-avatar" style="width:${size}px;height:${size}px;font-size:${fontSize}px;background:${clr.bg};color:${clr.text};">${initials(name)}</div>`;
+}
+
+/* ── Dashboard ── */
+function renderDashboard() {
+  const total = state.actions.length;
+  const done = state.actions.filter(a => a.status === 'done').length;
+  const inprog = state.actions.filter(a => a.status === 'inprogress').length;
+  const blocked = state.actions.filter(a => a.status === 'blocked').length;
+  const needed = state.parts.filter(p => p.status === 'needed').length;
+  const ordered = state.parts.filter(p => p.status === 'ordered').length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  const nextMeeting = [...state.meetings]
+    .filter(m => m.date >= today())
+    .sort((a, b) => a.date.localeCompare(b.date))[0] || null;
+
+  const priority = [...state.actions]
+    .filter(a => a.status !== 'done')
+    .sort((a, b) => ({ high: 0, medium: 1, low: 2 }[a.priority] || 1) - ({ high: 0, medium: 1, low: 2 }[b.priority] || 1))
+    .slice(0, 5);
+
+  return `
+  ${nextMeeting ? `
+  <div class="next-meeting-banner">
+    <i class="ti ti-calendar-event"></i>
+    <div>
+      <div class="nm-label">Next Sunday Meeting</div>
+      <div class="nm-date">${formatDate(nextMeeting.date)} — ${esc(nextMeeting.title)}</div>
+    </div>
+  </div>` : ''}
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Total Tasks</div><div class="stat-value blue">${total}</div></div>
+    <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value green">${done}</div></div>
+    <div class="stat-card"><div class="stat-label">In Progress</div><div class="stat-value amber">${inprog}</div></div>
+    <div class="stat-card"><div class="stat-label">Blocked</div><div class="stat-value red">${blocked}</div></div>
+    <div class="stat-card"><div class="stat-label">Parts Needed</div><div class="stat-value amber">${needed}</div></div>
+    <div class="stat-card"><div class="stat-label">Parts Ordered</div><div class="stat-value blue">${ordered}</div></div>
+    <div class="stat-card"><div class="stat-label">Team Size</div><div class="stat-value">${state.members.length}</div></div>
+  </div>
+
+  <div style="margin-bottom:1.5rem;">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:5px;">
+      <span>Overall completion</span><span style="font-weight:500;">${pct}%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title"><i class="ti ti-flame"></i> Priority Open Tasks</div>
+    <button class="add-btn secondary" onclick="navigate('actions')"><i class="ti ti-arrow-right"></i> View all</button>
+  </div>
+  <div class="card-list">
+    ${priority.length
+      ? priority.map(a => renderActionCard(a)).join('')
+      : '<div class="empty-state"><i class="ti ti-check"></i>All caught up! No open tasks.</div>'}
+  </div>`;
+}
+
+/* ── Actions ── */
+function renderActions() {
+  const filters = ['all', 'todo', 'inprogress', 'done', 'blocked'];
+  const filtered = state.actionFilter === 'all'
+    ? state.actions
+    : state.actions.filter(a => a.status === state.actionFilter);
+  const sorted = [...filtered].sort((a, b) =>
+    ({ high: 0, medium: 1, low: 2 }[a.priority] || 1) - ({ high: 0, medium: 1, low: 2 }[b.priority] || 1)
+  );
+
+  return `
+  <div class="section-header">
+    <div class="section-title"><i class="ti ti-checkbox"></i> Action Items</div>
+    <button class="add-btn" onclick="showAddAction()"><i class="ti ti-plus"></i> Add Task</button>
+  </div>
+  <div class="filter-bar">
+    ${filters.map(f => {
+      const count = f === 'all' ? state.actions.length : state.actions.filter(a => a.status === f).length;
+      const label = f === 'all' ? 'All' : f === 'inprogress' ? 'In Progress' : f.charAt(0).toUpperCase() + f.slice(1);
+      return `<button class="filter-chip ${state.actionFilter === f ? 'active' : ''}" onclick="setActionFilter('${f}')">${label} (${count})</button>`;
+    }).join('')}
+  </div>
+  <div class="card-list">
+    ${sorted.length
+      ? sorted.map(a => renderActionCard(a)).join('')
+      : '<div class="empty-state"><i class="ti ti-checkbox"></i>No tasks here yet.</div>'}
+  </div>`;
+}
+
+function renderActionCard(a) {
+  const member = state.members.find(m => m.id === a.assignee);
+  const isDone = a.status === 'done';
+  return `
+  <div class="item-card" style="${isDone ? 'opacity:0.6' : ''}">
+    <button class="check-btn ${isDone ? 'done' : ''}" onclick="toggleDone('${a.id}')" title="${isDone ? 'Mark incomplete' : 'Mark complete'}">
+      <i class="ti ti-check"></i>
+    </button>
+    <div class="item-main">
+      <div class="item-title" style="${isDone ? 'text-decoration:line-through' : ''}">${esc(a.title)}</div>
+      <div class="item-meta">
+        ${badgeHTML(a.status, 'status')}
+        ${badgeHTML(a.priority, 'priority')}
+        ${member ? `<span>${avatarHTML(member.name, 18, 9)} ${esc(member.name)}</span>` : ''}
+        ${a.due ? `<span><i class="ti ti-calendar" style="font-size:12px;"></i>${formatDate(a.due)}</span>` : ''}
+        ${a.category ? `<span><i class="ti ti-tag" style="font-size:12px;"></i>${esc(a.category)}</span>` : ''}
+      </div>
+      ${a.notes ? `<div class="item-note">${esc(a.notes)}</div>` : ''}
+    </div>
+    <div class="item-actions">
+      <button class="icon-btn" onclick="showEditAction('${a.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+      <button class="icon-btn danger" onclick="deleteAction('${a.id}')" title="Delete"><i class="ti ti-trash"></i></button>
+    </div>
+  </div>`;
+}
+
+/* ── Parts ── */
+function renderParts() {
+  const filters = ['all', 'needed', 'ordered', 'arrived'];
+  const filtered = state.partsFilter === 'all'
+    ? state.parts
+    : state.parts.filter(p => p.status === state.partsFilter);
+  const outstanding = state.parts
+    .filter(p => p.cost && p.status !== 'arrived')
+    .reduce((s, p) => s + (+p.cost || 0), 0);
+
+  return `
+  <div class="section-header">
+    <div class="section-title"><i class="ti ti-tool"></i> Parts & Ordering</div>
+    <button class="add-btn" onclick="showAddPart()"><i class="ti ti-plus"></i> Add Part</button>
+  </div>
+  ${outstanding > 0 ? `
+  <div class="cost-banner">
+    <i class="ti ti-receipt"></i>
+    Outstanding spend (needed + ordered): <strong>$${outstanding.toFixed(2)}</strong>
+  </div>` : ''}
+  <div class="filter-bar">
+    ${filters.map(f => {
+      const count = f === 'all' ? state.parts.length : state.parts.filter(p => p.status === f).length;
+      const label = f.charAt(0).toUpperCase() + f.slice(1);
+      return `<button class="filter-chip ${state.partsFilter === f ? 'active' : ''}" onclick="setPartsFilter('${f}')">${label} (${count})</button>`;
+    }).join('')}
+  </div>
+  <div class="card-list">
+    ${filtered.length
+      ? filtered.map(p => renderPartCard(p)).join('')
+      : '<div class="empty-state"><i class="ti ti-package"></i>No parts tracked yet.</div>'}
+  </div>`;
+}
+
+function renderPartCard(p) {
+  const member = state.members.find(m => m.id === p.assignee);
+  return `
+  <div class="item-card">
+    <div style="padding-top:2px;flex-shrink:0;"><i class="ti ti-package" style="font-size:20px;color:var(--text3);"></i></div>
+    <div class="item-main">
+      <div class="item-title">${esc(p.name)}</div>
+      <div class="item-meta">
+        ${badgeHTML(p.status, 'parts')}
+        ${p.qty ? `<span><i class="ti ti-hash" style="font-size:12px;"></i>Qty: ${esc(p.qty)}</span>` : ''}
+        ${p.cost ? `<span><i class="ti ti-currency-dollar" style="font-size:12px;"></i>${parseFloat(p.cost).toFixed(2)}</span>` : ''}
+        ${p.supplier ? `<span><i class="ti ti-building-store" style="font-size:12px;"></i>${esc(p.supplier)}</span>` : ''}
+        ${member ? `<span>${avatarHTML(member.name, 18, 9)} ${esc(member.name)}</span>` : ''}
+        ${p.category ? `<span><i class="ti ti-tag" style="font-size:12px;"></i>${esc(p.category)}</span>` : ''}
+      </div>
+      ${p.notes ? `<div class="item-note">${esc(p.notes)}</div>` : ''}
+      ${p.link ? `<div style="margin-top:5px;"><a href="${esc(p.link)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--info);text-decoration:none;display:inline-flex;align-items:center;gap:3px;"><i class="ti ti-external-link" style="font-size:13px;"></i>Order link</a></div>` : ''}
+    </div>
+    <div class="item-actions">
+      <button class="icon-btn" onclick="cyclePart('${p.id}')" title="Advance status"><i class="ti ti-refresh"></i></button>
+      <button class="icon-btn" onclick="showEditPart('${p.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+      <button class="icon-btn danger" onclick="deletePart('${p.id}')" title="Remove"><i class="ti ti-trash"></i></button>
+    </div>
+  </div>`;
+}
+
+/* ── Members ── */
+function renderMembers() {
+  return `
+  <div class="section-header">
+    <div class="section-title"><i class="ti ti-users"></i> Team Members (${state.members.length})</div>
+    <button class="add-btn" onclick="showAddMember()"><i class="ti ti-plus"></i> Add Member</button>
+  </div>
+  <div class="member-grid">
+    ${state.members.length ? state.members.map(m => {
+      const clr = getColor(m.name);
+      const taskCount = state.actions.filter(a => a.assignee === m.id).length;
+      const doneCount = state.actions.filter(a => a.assignee === m.id && a.status === 'done').length;
+      return `
+      <div class="member-card">
+        <div class="item-actions">
+          <button class="icon-btn" onclick="showEditMember('${m.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+          <button class="icon-btn danger" onclick="deleteMember('${m.id}')" title="Remove"><i class="ti ti-trash"></i></button>
+        </div>
+        <div class="member-big-avatar" style="background:${clr.bg};color:${clr.text};">${initials(m.name)}</div>
+        <div class="member-name">${esc(m.name)}</div>
+        <div class="member-role">${esc(m.role || 'Team Member')}</div>
+        <div class="member-stats">${taskCount} tasks · ${doneCount} done</div>
+        ${m.skills ? `<div class="member-skills">${esc(m.skills)}</div>` : ''}
+      </div>`;
+    }).join('') : '<div class="empty-state" style="grid-column:1/-1"><i class="ti ti-users"></i>No team members yet. Add your first member!</div>'}
+  </div>`;
+}
+
+/* ── Meetings ── */
+function renderMeetings() {
+  const sorted = [...state.meetings].sort((a, b) => b.date.localeCompare(a.date));
+  return `
+  <div class="section-header">
+    <div class="section-title"><i class="ti ti-calendar"></i> Sunday Meetings</div>
+    <button class="add-btn" onclick="showAddMeeting()"><i class="ti ti-plus"></i> Log Meeting</button>
+  </div>
+  ${sorted.length ? sorted.map(m => `
+  <div class="meeting-card">
+    <div class="meeting-date"><i class="ti ti-calendar-event" style="font-size:13px;"></i>${formatDate(m.date)}</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
+      <div style="flex:1;min-width:0;">
+        <div class="meeting-title">${esc(m.title)}</div>
+        ${m.attendees ? `<div style="font-size:12px;color:var(--text3);margin-bottom:6px;display:flex;align-items:center;gap:4px;"><i class="ti ti-users" style="font-size:13px;"></i>${esc(m.attendees)}</div>` : ''}
+        ${m.notes ? `<div class="meeting-notes">${esc(m.notes)}</div>` : ''}
+      </div>
+      <div class="item-actions">
+        <button class="icon-btn" onclick="showEditMeeting('${m.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+        <button class="icon-btn danger" onclick="deleteMeeting('${m.id}')" title="Delete"><i class="ti ti-trash"></i></button>
+      </div>
+    </div>
+  </div>`).join('') : '<div class="empty-state"><i class="ti ti-calendar"></i>No meetings logged yet.</div>'}`;
+}
+
+/* ── Modal helpers ── */
+function showModal(html) {
+  document.getElementById('modal-container').innerHTML =
+    `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`;
+}
+function closeModal() { document.getElementById('modal-container').innerHTML = ''; }
+
+let toastTimer;
+function toast(msg) {
+  clearTimeout(toastTimer);
+  document.getElementById('toast-container').innerHTML =
+    `<div class="toast"><i class="ti ti-circle-check"></i>${msg}</div>`;
+  toastTimer = setTimeout(() => { document.getElementById('toast-container').innerHTML = ''; }, 2500);
+}
+
+/* ── Action CRUD ── */
+function showAddAction() {
+  showModal(`
+  <div class="modal-title"><i class="ti ti-checkbox"></i>New Action Item</div>
+  <div class="form-row"><label class="form-label">Task title *</label><input class="form-input" id="f-title" placeholder="What needs to be done?" autofocus></div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Assigned to</label><select class="form-select" id="f-assignee">${memberOptions('')}</select></div>
+    <div class="form-row"><label class="form-label">Priority</label><select class="form-select" id="f-priority"><option value="high">🔴 High</option><option value="medium" selected>🟡 Medium</option><option value="low">🟢 Low</option></select></div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="todo" selected>To Do</option><option value="inprogress">In Progress</option><option value="blocked">Blocked</option><option value="done">Done</option></select></div>
+    <div class="form-row"><label class="form-label">Due date</label><input type="date" class="form-input" id="f-due"></div>
+  </div>
+  <div class="form-row"><label class="form-label">Category</label><input class="form-input" id="f-category" placeholder="e.g. Drivetrain, Programming, Design"></div>
+  <div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="f-notes" placeholder="Additional details…"></textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="saveAction(null)">Add Task</button>
+  </div>`);
+}
+
+function showEditAction(id) {
+  const a = state.actions.find(x => x.id === id); if (!a) return;
+  showModal(`
+  <div class="modal-title"><i class="ti ti-edit"></i>Edit Task</div>
+  <div class="form-row"><label class="form-label">Task title *</label><input class="form-input" id="f-title" value="${esc(a.title)}" autofocus></div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Assigned to</label><select class="form-select" id="f-assignee">${memberOptions(a.assignee)}</select></div>
+    <div class="form-row"><label class="form-label">Priority</label><select class="form-select" id="f-priority"><option value="high" ${a.priority==='high'?'selected':''}>🔴 High</option><option value="medium" ${a.priority==='medium'?'selected':''}>🟡 Medium</option><option value="low" ${a.priority==='low'?'selected':''}>🟢 Low</option></select></div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="todo" ${a.status==='todo'?'selected':''}>To Do</option><option value="inprogress" ${a.status==='inprogress'?'selected':''}>In Progress</option><option value="blocked" ${a.status==='blocked'?'selected':''}>Blocked</option><option value="done" ${a.status==='done'?'selected':''}>Done</option></select></div>
+    <div class="form-row"><label class="form-label">Due date</label><input type="date" class="form-input" id="f-due" value="${esc(a.due||'')}"></div>
+  </div>
+  <div class="form-row"><label class="form-label">Category</label><input class="form-input" id="f-category" value="${esc(a.category||'')}"></div>
+  <div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="f-notes">${esc(a.notes||'')}</textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="saveAction('${id}')">Save Changes</button>
+  </div>`);
+}
+
+function saveAction(id) {
+  const title = document.getElementById('f-title').value.trim();
+  if (!title) { alert('Please enter a task title.'); return; }
+  const data = {
+    title,
+    assignee: document.getElementById('f-assignee').value,
+    priority: document.getElementById('f-priority').value,
+    status: document.getElementById('f-status').value,
+    due: document.getElementById('f-due').value,
+    category: document.getElementById('f-category').value,
+    notes: document.getElementById('f-notes').value
+  };
+  if (id) {
+    const i = state.actions.findIndex(a => a.id === id);
+    if (i > -1) Object.assign(state.actions[i], data);
+  } else {
+    state.actions.push({ id: uid(), createdAt: today(), ...data });
+  }
+  save(); closeModal(); render(); toast(id ? 'Task updated!' : 'Task added!');
+}
+
+function toggleDone(id) {
+  const a = state.actions.find(x => x.id === id); if (!a) return;
+  a.status = a.status === 'done' ? 'todo' : 'done';
+  save(); render(); toast(a.status === 'done' ? '✓ Marked complete!' : 'Marked incomplete');
+}
+
+function deleteAction(id) {
+  if (!confirm('Delete this task?')) return;
+  state.actions = state.actions.filter(a => a.id !== id);
+  save(); render(); toast('Task deleted');
+}
+
+function setActionFilter(f) { state.actionFilter = f; render(); }
+
+/* ── Parts CRUD ── */
+function showAddPart() {
+  showModal(`
+  <div class="modal-title"><i class="ti ti-package"></i>Add Part</div>
+  <div class="form-row"><label class="form-label">Part name *</label><input class="form-input" id="f-name" placeholder="e.g. REV HD Hex Motor" autofocus></div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="needed">Needed</option><option value="ordered">Ordered</option><option value="arrived">Arrived</option></select></div>
+    <div class="form-row"><label class="form-label">Quantity</label><input class="form-input" id="f-qty" placeholder="e.g. 4"></div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Est. Cost ($)</label><input class="form-input" id="f-cost" type="number" step="0.01" placeholder="0.00"></div>
+    <div class="form-row"><label class="form-label">Supplier</label><input class="form-input" id="f-supplier" placeholder="e.g. REV Robotics, Amazon"></div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Category</label><input class="form-input" id="f-category" placeholder="e.g. Motors, Sensors"></div>
+    <div class="form-row"><label class="form-label">Ordered by</label><select class="form-select" id="f-assignee">${memberOptions('')}</select></div>
+  </div>
+  <div class="form-row"><label class="form-label">Order link (URL)</label><input class="form-input" id="f-link" placeholder="https://…"></div>
+  <div class="form-row"><label class="form-label">Notes / Part number</label><textarea class="form-textarea" id="f-notes" placeholder="SKU, specs, or other info…"></textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="savePart(null)">Add Part</button>
+  </div>`);
+}
+
+function showEditPart(id) {
+  const p = state.parts.find(x => x.id === id); if (!p) return;
+  showModal(`
+  <div class="modal-title"><i class="ti ti-edit"></i>Edit Part</div>
+  <div class="form-row"><label class="form-label">Part name *</label><input class="form-input" id="f-name" value="${esc(p.name)}" autofocus></div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="needed" ${p.status==='needed'?'selected':''}>Needed</option><option value="ordered" ${p.status==='ordered'?'selected':''}>Ordered</option><option value="arrived" ${p.status==='arrived'?'selected':''}>Arrived</option></select></div>
+    <div class="form-row"><label class="form-label">Quantity</label><input class="form-input" id="f-qty" value="${esc(p.qty||'')}"></div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Est. Cost ($)</label><input class="form-input" id="f-cost" type="number" step="0.01" value="${esc(p.cost||'')}"></div>
+    <div class="form-row"><label class="form-label">Supplier</label><input class="form-input" id="f-supplier" value="${esc(p.supplier||'')}"></div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Category</label><input class="form-input" id="f-category" value="${esc(p.category||'')}"></div>
+    <div class="form-row"><label class="form-label">Ordered by</label><select class="form-select" id="f-assignee">${memberOptions(p.assignee)}</select></div>
+  </div>
+  <div class="form-row"><label class="form-label">Order link (URL)</label><input class="form-input" id="f-link" value="${esc(p.link||'')}"></div>
+  <div class="form-row"><label class="form-label">Notes / Part number</label><textarea class="form-textarea" id="f-notes">${esc(p.notes||'')}</textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="savePart('${id}')">Save Changes</button>
+  </div>`);
+}
+
+function savePart(id) {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { alert('Please enter a part name.'); return; }
+  const data = {
+    name,
+    status: document.getElementById('f-status').value,
+    qty: document.getElementById('f-qty').value,
+    cost: document.getElementById('f-cost').value,
+    supplier: document.getElementById('f-supplier').value,
+    category: document.getElementById('f-category').value,
+    assignee: document.getElementById('f-assignee').value,
+    link: document.getElementById('f-link').value,
+    notes: document.getElementById('f-notes').value
+  };
+  if (id) {
+    const i = state.parts.findIndex(p => p.id === id);
+    if (i > -1) Object.assign(state.parts[i], data);
+  } else {
+    state.parts.push({ id: uid(), ...data });
+  }
+  save(); closeModal(); render(); toast(id ? 'Part updated!' : 'Part added!');
+}
+
+function cyclePart(id) {
+  const p = state.parts.find(x => x.id === id); if (!p) return;
+  p.status = { needed: 'ordered', ordered: 'arrived', arrived: 'needed' }[p.status] || 'needed';
+  save(); render(); toast('Status → ' + p.status);
+}
+
+function deletePart(id) {
+  if (!confirm('Remove this part?')) return;
+  state.parts = state.parts.filter(p => p.id !== id);
+  save(); render(); toast('Part removed');
+}
+
+function setPartsFilter(f) { state.partsFilter = f; render(); }
+
+/* ── Members CRUD ── */
+function showAddMember() {
+  showModal(`
+  <div class="modal-title"><i class="ti ti-user-plus"></i>Add Team Member</div>
+  <div class="form-row"><label class="form-label">Full name *</label><input class="form-input" id="f-name" placeholder="First Last" autofocus></div>
+  <div class="form-row"><label class="form-label">Role / Specialty</label><input class="form-input" id="f-role" placeholder="e.g. Lead Programmer, Mechanical, Driver"></div>
+  <div class="form-row"><label class="form-label">Skills</label><input class="form-input" id="f-skills" placeholder="e.g. Java, CAD, 3D Printing, Wiring"></div>
+  <div class="form-row"><label class="form-label">Contact / Notes</label><textarea class="form-textarea" id="f-notes" placeholder="Email, phone, or anything useful…"></textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="saveMember(null)">Add Member</button>
+  </div>`);
+}
+
+function showEditMember(id) {
+  const m = state.members.find(x => x.id === id); if (!m) return;
+  showModal(`
+  <div class="modal-title"><i class="ti ti-edit"></i>Edit Member</div>
+  <div class="form-row"><label class="form-label">Full name *</label><input class="form-input" id="f-name" value="${esc(m.name)}" autofocus></div>
+  <div class="form-row"><label class="form-label">Role / Specialty</label><input class="form-input" id="f-role" value="${esc(m.role||'')}"></div>
+  <div class="form-row"><label class="form-label">Skills</label><input class="form-input" id="f-skills" value="${esc(m.skills||'')}"></div>
+  <div class="form-row"><label class="form-label">Contact / Notes</label><textarea class="form-textarea" id="f-notes">${esc(m.notes||'')}</textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="saveMember('${id}')">Save Changes</button>
+  </div>`);
+}
+
+function saveMember(id) {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { alert('Please enter a name.'); return; }
+  const data = {
+    name,
+    role: document.getElementById('f-role').value,
+    skills: document.getElementById('f-skills').value,
+    notes: document.getElementById('f-notes').value
+  };
+  if (id) {
+    const i = state.members.findIndex(m => m.id === id);
+    if (i > -1) Object.assign(state.members[i], data);
+  } else {
+    state.members.push({ id: uid(), ...data });
+  }
+  save(); closeModal(); render(); toast(id ? 'Member updated!' : 'Member added!');
+}
+
+function deleteMember(id) {
+  if (!confirm('Remove this member? Their tasks will become unassigned.')) return;
+  state.members = state.members.filter(m => m.id !== id);
+  state.actions.forEach(a => { if (a.assignee === id) a.assignee = ''; });
+  state.parts.forEach(p => { if (p.assignee === id) p.assignee = ''; });
+  save(); render(); toast('Member removed');
+}
+
+/* ── Meetings CRUD ── */
+function showAddMeeting() {
+  const d = new Date();
+  const diff = (7 - d.getDay()) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  const nextSun = d.toISOString().slice(0, 10);
+  showModal(`
+  <div class="modal-title"><i class="ti ti-calendar-plus"></i>Log Meeting</div>
+  <div class="form-row"><label class="form-label">Date *</label><input type="date" class="form-input" id="f-date" value="${nextSun}" autofocus></div>
+  <div class="form-row"><label class="form-label">Title</label><input class="form-input" id="f-title" placeholder="e.g. Sprint Planning, Build Day, Strategy Session"></div>
+  <div class="form-row"><label class="form-label">Attendees</label><input class="form-input" id="f-attendees" placeholder="Who was there?"></div>
+  <div class="form-row"><label class="form-label">Notes, agenda & decisions</label><textarea class="form-textarea" id="f-notes" style="min-height:110px;" placeholder="What was discussed? Key decisions? Next steps?"></textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="saveMeeting(null)">Save Meeting</button>
+  </div>`);
+}
+
+function showEditMeeting(id) {
+  const m = state.meetings.find(x => x.id === id); if (!m) return;
+  showModal(`
+  <div class="modal-title"><i class="ti ti-edit"></i>Edit Meeting</div>
+  <div class="form-row"><label class="form-label">Date *</label><input type="date" class="form-input" id="f-date" value="${esc(m.date)}" autofocus></div>
+  <div class="form-row"><label class="form-label">Title</label><input class="form-input" id="f-title" value="${esc(m.title||'')}"></div>
+  <div class="form-row"><label class="form-label">Attendees</label><input class="form-input" id="f-attendees" value="${esc(m.attendees||'')}"></div>
+  <div class="form-row"><label class="form-label">Notes, agenda & decisions</label><textarea class="form-textarea" id="f-notes" style="min-height:110px;">${esc(m.notes||'')}</textarea></div>
+  <div class="modal-actions">
+    <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-save" onclick="saveMeeting('${id}')">Save Changes</button>
+  </div>`);
+}
+
+function saveMeeting(id) {
+  const date = document.getElementById('f-date').value;
+  if (!date) { alert('Please pick a date.'); return; }
+  const data = {
+    date,
+    title: document.getElementById('f-title').value || 'Sunday Meeting',
+    attendees: document.getElementById('f-attendees').value,
+    notes: document.getElementById('f-notes').value
+  };
+  if (id) {
+    const i = state.meetings.findIndex(m => m.id === id);
+    if (i > -1) Object.assign(state.meetings[i], data);
+  } else {
+    state.meetings.push({ id: uid(), ...data });
+  }
+  save(); closeModal(); render(); toast(id ? 'Meeting updated!' : 'Meeting saved!');
+}
+
+function deleteMeeting(id) {
+  if (!confirm('Delete this meeting log?')) return;
+  state.meetings = state.meetings.filter(m => m.id !== id);
+  save(); render(); toast('Meeting deleted');
+}
+
+/* ── Boot ── */
+load();
+render();
+</script>
+</body>
+</html>
